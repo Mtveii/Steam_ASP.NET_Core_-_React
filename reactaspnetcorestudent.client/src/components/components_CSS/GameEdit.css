@@ -1,0 +1,44 @@
+.modal-overlay{
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+}
+.modal{
+    background: rgba(26,26,26,0.10);
+    border-radius: 12px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.6);
+    padding: 32px;
+    min-width: 400px; max-width: 90vw;
+    border: 1px solid #444;
+    color: white;
+    backdrop-filter: blur(4px);
+}
+.modal-title{ color:#20c997; text-align:center; margin-bottom:1.5rem; }
+.modal-divider{ border-color:#444; margin:1rem 0; }
+
+.form-label{ color:#dee2e6; font-weight:500; }
+.form-control-custom{
+    background-color:#2d2d2d; border:1px solid #444; color:white; width:100%;
+}
+.help-text{ color:#6c757d; }
+
+.preview-image{
+    border:1px solid #444; border-radius:4px; max-height:200px; object-fit:cover; width:100%;
+}
+.preview-empty{
+    border:1px solid #444; border-radius:4px; height:200px; display:flex; align-items:center; justify-content:center; color:#6c757d;
+}
+
+.button-group{ display:flex; flex-direction:column; gap:0.5rem; margin-top:1rem; }
+
+.btn-custom{ width:100%; padding:10px; border-radius:4px; cursor:pointer; transition:all .2s; background:transparent; }
+.btn-primary-custom{ border:1px solid #198754; color:#198754; }
+.btn-primary-custom:hover{ background: rgba(25,135,84,0.1); }
+.btn-secondary-custom{ border:1px solid #6c757d; color:#6c757d; }
+.btn-secondary-custom:hover{ background: rgba(108,117,125,0.1); }
+
+.error-box{ color:#dc3545; text-align:center; margin-bottom:1rem; padding:10px; background-color: rgba(220,53,69,0.1); border-radius:4px; }

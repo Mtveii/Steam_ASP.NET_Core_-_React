@@ -1,0 +1,44 @@
+.modal-overlay{
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+}
+.modal{
+    background: rgba(26,26,26,0.90);
+    border-radius: 12px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.6);
+    padding: 32px;
+    min-width: 400px; max-width: 90vw;
+    border: 1px solid #444;
+    color: white;
+    backdrop-filter: blur(4px);
+}
+.modal-title{ color: white; text-align: center; margin-bottom: 1.5rem; }
+
+.form-label{ color: #dee2e6; font-weight: 500; }
+
+.form-control-custom{
+    background-color: #2d2d2d;
+    border: 1px solid #444;
+    color: white;
+    width: 100%;
+    padding: .6rem .9rem;
+    border-radius: 6px;
+    margin-bottom: .75rem;
+}
+
+.btn-custom{ width: 100%; padding: 12px; border-radius: 6px; cursor: pointer; transition: all .15s; background: transparent; border: 1px solid transparent; color: #fff; }
+.btn-primary-custom{ border: 1px solid #198754; color: #198754; }
+.btn-primary-custom:hover{ background: rgba(25,135,84,0.08); }
+
+.link-register{
+    color: #ffc107;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin-top: 1rem;
+}

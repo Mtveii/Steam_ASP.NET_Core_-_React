@@ -1,0 +1,42 @@
+﻿.student,
+.add-student,
+.edit-student {
+   padding: 20px;
+   width: 800px;
+}
+.students {
+   padding: 20px;
+   width: 75%;
+}
+.btn {
+   margin-right: 30px;
+}
+
+footer {
+   display: flex;
+   justify-content: left;
+   padding-top: 15px;
+   padding-left: 30px;
+   background-color: #45a1ff;
+   vertical-align: central;
+   color: white;
+}
+
+#nav {
+   display: flex;
+   justify-content: left;
+   padding: 15px 30px;
+   /*    padding-left: 30px;*/
+   background-color: #45a1ff;
+   vertical-align: central;
+   color: white;
+}
+.smallImg {
+   height: 32px;
+}
+.bigImg {
+   max-width: 300px;
+}
+.prevImg {
+   max-width: 300px;
+}

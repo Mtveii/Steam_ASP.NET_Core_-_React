@@ -1,0 +1,19 @@
+@ReactAspNetCoreStudent.Server_HostAddress = http://localhost:5253
+
+
+GET {{ReactAspNetCoreStudent.Server_HostAddress}}/api/students/
+Accept: application/json
+
+###
+
+GET {{ReactAspNetCoreStudent.Server_HostAddress}}/api/students/1
+Accept: application/json
+
+###
+
+GET {{ReactAspNetCoreStudent.Server_HostAddress}}/api/students/
+Accept: application/json
+
+###
+
+

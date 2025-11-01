@@ -1,0 +1,322 @@
+.community-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    color: #ffffff;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.community-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+.community-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #00ff88, #00ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+.add-screenshot-btn {
+    background: linear-gradient(45deg, #00ff88, #00ccff);
+    border: none;
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.add-screenshot-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+}
+
+.screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.screenshot-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.screenshot-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 255, 136, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 255, 136, 0.2);
+}
+
+.screenshot-image {
+    width: 100%;
+    height: 250px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.screenshot-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.screenshot-card:hover .screenshot-image img {
+    transform: scale(1.05);
+}
+
+.screenshot-info h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #ffffff;
+}
+
+.author {
+    color: #00ccff;
+    font-size: 0.9rem;
+    margin: 0 0 8px 0;
+    font-weight: 500;
+}
+
+.rating {
+    color: #00ff88;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.screenshot-actions {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.vote-btn, .comment-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 10px 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.vote-btn:hover, .comment-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.vote-btn.active {
+    background: linear-gradient(45deg, #00ff88, #00ccff);
+    border-color: transparent;
+    color: #000;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.comment-section {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comment-section textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+
+.comment-section textarea:focus {
+    outline: none;
+    border-color: #00ccff;
+    box-shadow: 0 0 0 2px rgba(0, 204, 255, 0.2);
+}
+
+.comment-section textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.comment-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.comment-actions button {
+    flex: 1;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.comment-actions button:first-child {
+    background: linear-gradient(45deg, #00ff88, #00ccff);
+    color: #000;
+}
+
+.comment-actions button:first-child:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.comment-actions button:last-child {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.comment-actions button:last-child:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.comments-list {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comments-list h4 {
+    font-size: 1.1rem;
+    margin: 0 0 15px 0;
+    color: #00ccff;
+}
+
+.comment {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid #00ff88;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.comment-header strong {
+    color: #00ff88;
+    font-size: 0.9rem;
+}
+
+.comment-date {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+}
+
+.comment p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .community-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .community-header h1 {
+        font-size: 2rem;
+    }
+
+    .screenshots-grid {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+    }
+
+    .screenshot-actions {
+        flex-direction: column;
+    }
+
+    .vote-btn, .comment-btn {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .community-page {
+        padding: 10px;
+    }
+
+    .screenshot-card {
+        padding: 15px;
+    }
+
+    .screenshot-image {
+        height: 200px;
+    }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.screenshot-card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Скроллбар */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #00ff88, #00ccff);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #00ccff, #00ff88);
+}

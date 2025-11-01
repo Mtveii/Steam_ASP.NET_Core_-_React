@@ -1,0 +1,133 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal {
+    background: rgba(26, 26, 26, 0.10);
+    border-radius: 12px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+    padding: 32px;
+    width: 800px;
+    max-width: 90vw;
+    border: 1px solid #364663;
+    color: white;
+}
+
+.modal-title {
+    color: #20c997;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    color: #dee2e6;
+    font-weight: 500;
+}
+
+.form-control-custom {
+    background-color: #2d2d2d !important;
+    border: 1px solid #444 !important;
+    color: white !important;
+    width: 100%;
+}
+
+.form-control-custom:focus {
+    background-color: #2d2d2d;
+    border-color: #20c997;
+    color: white;
+    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
+}
+
+.preview-image {
+    border: 1px solid #444;
+    border-radius: 4px;
+    max-height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.no-image-placeholder {
+    border: 1px solid #444;
+    border-radius: 4px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn-primary-custom {
+    border: 1px solid #198754 !important;
+    color: #198754 !important;
+    background-color: transparent !important;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary-custom:hover:not(:disabled) {
+    background-color: rgba(25, 135, 84, 0.1) !important;
+    border-color: #198754 !important;
+    color: #198754 !important;
+}
+
+.btn-primary-custom:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-secondary-custom {
+    border: 1px solid #6c757d !important;
+    color: #6c757d !important;
+    background-color: transparent !important;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary-custom:hover:not(:disabled) {
+    background-color: rgba(108, 117, 125, 0.1) !important;
+    border-color: #6c757d !important;
+    color: #6c757d !important;
+}
+
+.btn-secondary-custom:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #dc3545;
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 10px;
+    background-color: rgba(220, 53, 69, 0.1);
+    border-radius: 4px;
+}
+
+/* Стили для разделителя (если используется) */
+.divider {
+    border-color: #444;
+    margin: 1rem 0;
+}
