@@ -127,36 +127,31 @@ Backend (ASP.NET Core)
 
 📁 Project Structure
 
-. Frontend (React)
-
-/client (React Project Root)
-├── src/
-│   ├── components/           # React components
-│   │   ├── Game.jsx         # Game display component
-│   │   ├── GameCreate.jsx   # Game creation form (Admin)
-│   │   ├── GameEdit.jsx     # Game editing interface (Admin)
-│   │   ├── GameDelete.jsx   # Game deletion component (Admin)
-│   │   ├── Games.jsx        # Games list view
-│   │   ├── ChatPage.jsx     # Global Chat functionality
-│   │   ├── CommunityPage.jsx# Community features
-│   │   ├── ProfilePage.jsx  # User profile management
-│   │   ├── Login.jsx        # User authentication
-│   │   ├── Register.jsx     # User registration
-│   │   └── components_CSS/  # Component-specific styles
-│   ├── assets/             # Static assets (images, fonts)
-│   └── App.jsx            # Main application component
-└── package.json            # Frontend dependencies and scripts
-
-2. Backend (ASP.NET Core Web API)
-
-/server (ASP.NET Core Project Root)
-├── Controllers/         # API Endpoints (e.g., GamesController, AuthController)
-├── Data/                # DbContext, Migrations folder
-├── Models/              # Entity Models (Users, Games, ChatMessages, etc.)
-├── Services/            # Business Logic (e.g., UserService, GameService)
-└── Program.cs           # Application configuration and startup
-1. Clone the repository
-
+<ul>
+    <H1>src/</H1>
+    <li>├── components/           # React components</li>
+    <li><li>│   ├── Game.jsx         # Game display component</li></li>
+    <li><li>│   ├── GameCreate.jsx   # Game creation form</li></li>
+    <li><li>│   ├── GameEdit.jsx     # Game editing interface</li></li>
+    <li><li>│   ├── GameDelete.jsx   # Game deletion component</li></li>
+    <li><li>│   ├── Games.jsx        # Games list view</li></li>
+    <li><li>│   ├── ChatPage.jsx     # Chat functionality</li></li>
+    <li><li>│   ├── CommunityPage.jsx# Community features</li></li>
+    <li><li>│   ├── ProfilePage.jsx  # User profile management</li></li>
+    <li><li>│   ├── Login.jsx        # User authentication</li></li>
+    <li><li>│   ├── Register.jsx     # User registration</li></li>
+    <li><li>│   └── components_CSS/  # Component-specific styles</li></li>
+    <li>├── assets/             # Static assets</li>
+    <li>└── App.jsx            # Main application component</li>
+</ul>
+BackendProject/ (ASP.NET Core Web API)
+<ul>
+    <li>├── Controllers/         # API Endpoints (e.g., GamesController, AuthController)</li>
+    <li>├── Data/                # DbContext, Migrations</li>
+    <li>├── Models/              # Entity Models (Users, Games, etc.)</li>
+    <li>├── Services/            # Business Logic (e.g., UserService, GameService)</li>
+    <li>└── Program.cs           # Application configuration</li>
+</ul>
 
 
 git clone <repository_url>
