@@ -127,8 +127,6 @@ Backend (ASP.NET Core)
 
 📁 Project Structure
 
-Bash
-
 src/
 ├── components/           # React components
 │   ├── Game.jsx         # Game display component
@@ -155,7 +153,7 @@ BackendProject/ (ASP.NET Core Web API)
 
 1. Clone the repository
 
-Bash
+
 
 git clone <repository_url>
 cd steam-clone-project
@@ -165,7 +163,7 @@ cd steam-clone-project
 Navigate to your ASP.NET Core project directory (e.g., BackendProject/) and use the .NET CLI or NuGet Package Manager Console to apply migrations and update the database schema.
 
 Using .NET CLI (Recommended for cross-platform):
-Bash
+
 
 # Add a new migration (only needed after making model changes in the DbContext)
 dotnet ef migrations add InitialCreate
@@ -184,7 +182,7 @@ Update-Database
 
 3. Run the Backend (ASP.NET Core Web API)
 
-Bash
+
 
 # In the BackendProject directory
 dotnet run
@@ -194,14 +192,25 @@ The API will typically start on a port like https://localhost:7000.
 4. Run the Frontend (React)
 
 Navigate to the React project directory (e.g., src/ or Frontend/) and install dependencies, then start the development server.
-Bash
+
 
 npm install
-npm run dev
 
 The React app will typically start on a port like http://localhost:5173.
 
-🖼️ UI Screenshots Showcase
+
+
+
+<img width="814" height="765" alt="Снимок экрана 2025-11-02 134603" src="https://github.com/user-attachments/assets/a32dc3f2-d359-4f71-8309-adceca0d5642" />
+<img width="1785" height="896" alt="Снимок экрана 2025-11-02 134642" src="https://github.com/user-attachments/assets/547d4691-bd39-4a47-8289-d4ba217e12c0" />
+<img width="1725" height="870" alt="Снимок экрана 2025-11-02 134808" src="https://github.com/user-attachments/assets/fa32bf79-fa6a-4ed0-994c-63ad64a38107" />
+<img width="1780" height="859" alt="Снимок экрана 2025-11-02 134730" src="https://github.com/user-attachments/assets/df838e3b-5dba-4f22-8d58-cfc61071f2a4" />
+<img width="1715" height="852" alt="Снимок экрана 2025-11-02 134716" src="https://github.com/user-attachments/assets/951041fd-3a85-4abc-98c1-48fd585f66e9" />
+<img width="1752" height="868" alt="Снимок экрана 2025-11-02 134706" src="https://github.com/user-attachments/assets/c7104c60-2ea8-4047-baef-1ddd31feaba2" />
+<img width="1745" height="857" alt="Снимок экрана 2025-11-02 134648" src="https://github.com/user-attachments/assets/b925bef7-1216-430b-9a43-4bd52c98bfd2" />
+
+
+
 
 Here are some screenshots showcasing the application's key features:
 
