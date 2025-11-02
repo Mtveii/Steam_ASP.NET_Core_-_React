@@ -127,6 +127,8 @@ Backend (ASP.NET Core)
 
 📁 Project Structure
 
+Bash
+
 src/
 ├── components/           # React components
 │   ├── Game.jsx         # Game display component
