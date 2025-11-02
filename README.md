@@ -127,30 +127,34 @@ Backend (ASP.NET Core)
 
 📁 Project Structure
 
-src/
-├── components/           # React components
-│   ├── Game.jsx         # Game display component
-│   ├── GameCreate.jsx   # Game creation form
-│   ├── GameEdit.jsx     # Game editing interface
-│   ├── GameDelete.jsx   # Game deletion component
-│   ├── Games.jsx        # Games list view
-│   ├── ChatPage.jsx     # Chat functionality
-│   ├── CommunityPage.jsx# Community features
-│   ├── ProfilePage.jsx  # User profile management
-│   ├── Login.jsx        # User authentication
-│   ├── Register.jsx     # User registration
-│   └── components_CSS/  # Component-specific styles
-├── assets/             # Static assets
-└── App.jsx            # Main application component
+. Frontend (React)
 
-BackendProject/ (ASP.NET Core Web API)
+/client (React Project Root)
+├── src/
+│   ├── components/           # React components
+│   │   ├── Game.jsx         # Game display component
+│   │   ├── GameCreate.jsx   # Game creation form (Admin)
+│   │   ├── GameEdit.jsx     # Game editing interface (Admin)
+│   │   ├── GameDelete.jsx   # Game deletion component (Admin)
+│   │   ├── Games.jsx        # Games list view
+│   │   ├── ChatPage.jsx     # Global Chat functionality
+│   │   ├── CommunityPage.jsx# Community features
+│   │   ├── ProfilePage.jsx  # User profile management
+│   │   ├── Login.jsx        # User authentication
+│   │   ├── Register.jsx     # User registration
+│   │   └── components_CSS/  # Component-specific styles
+│   ├── assets/             # Static assets (images, fonts)
+│   └── App.jsx            # Main application component
+└── package.json            # Frontend dependencies and scripts
+
+2. Backend (ASP.NET Core Web API)
+
+/server (ASP.NET Core Project Root)
 ├── Controllers/         # API Endpoints (e.g., GamesController, AuthController)
-├── Data/                # DbContext, Migrations
-├── Models/              # Entity Models (Users, Games, etc.)
+├── Data/                # DbContext, Migrations folder
+├── Models/              # Entity Models (Users, Games, ChatMessages, etc.)
 ├── Services/            # Business Logic (e.g., UserService, GameService)
-└── Program.cs           # Application configuration
-🚦 Getting Started
-
+└── Program.cs           # Application configuration and startup
 1. Clone the repository
 
 
@@ -200,17 +204,9 @@ The React app will typically start on a port like http://localhost:5173.
 
 
 
-
 <img width="217" height="255" alt="Снимок экрана 2025-11-02 134603" src="https://github.com/user-attachments/assets/a32dc3f2-d359-4f71-8309-adceca0d5642" />
 
 <img width="377" height="195" alt="Снимок экрана 2025-11-02 134808" src="https://github.com/user-attachments/assets/fa32bf79-fa6a-4ed0-994c-63ad64a38107" />
-
-
-
-
-
-
-
 
 Here are some screenshots showcasing the application's key features:
 
@@ -219,9 +215,6 @@ Here are some screenshots showcasing the application's key features:
 Game Catalog / List View
 
 <img width="377" height="195" alt="Снимок экрана 2025-11-02 134648" src="https://github.com/user-attachments/assets/b925bef7-1216-430b-9a43-4bd52c98bfd2" />
-
-Game Detail Page
-<img width="377" height="195" alt="Снимок экрана 2025-11-02 134706" src="https://github.com/user-attachments/assets/c7104c60-2ea8-4047-baef-1ddd31feaba2" />
 
 Community Screenshots Gallery
 
