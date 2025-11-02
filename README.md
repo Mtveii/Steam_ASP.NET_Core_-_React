@@ -202,41 +202,38 @@ The React app will typically start on a port like http://localhost:5173.
 
 
 <img width="217" height="255" alt="Снимок экрана 2025-11-02 134603" src="https://github.com/user-attachments/assets/a32dc3f2-d359-4f71-8309-adceca0d5642" />
-<img width="377" height="195" alt="Снимок экрана 2025-11-02 134642" src="https://github.com/user-attachments/assets/547d4691-bd39-4a47-8289-d4ba217e12c0" />
+
 <img width="377" height="195" alt="Снимок экрана 2025-11-02 134808" src="https://github.com/user-attachments/assets/fa32bf79-fa6a-4ed0-994c-63ad64a38107" />
-<img width="377" height="195" alt="Снимок экрана 2025-11-02 134730" src="https://github.com/user-attachments/assets/df838e3b-5dba-4f22-8d58-cfc61071f2a4" />
-<img width="377" height="195" alt="Снимок экрана 2025-11-02 134716" src="https://github.com/user-attachments/assets/951041fd-3a85-4abc-98c1-48fd585f66e9" />
-<img width="377" height="195" alt="Снимок экрана 2025-11-02 134706" src="https://github.com/user-attachments/assets/c7104c60-2ea8-4047-baef-1ddd31feaba2" />
-<img width="377" height="195" alt="Снимок экрана 2025-11-02 134648" src="https://github.com/user-attachments/assets/b925bef7-1216-430b-9a43-4bd52c98bfd2" />
+
+
+
+
 
 
 
 
 Here are some screenshots showcasing the application's key features:
 
-Homepage / Featured Slider
-
-(Place the screenshot of the Promotional Slider here, like Снимок экрана 2025-11-02 134603.png or Снимок экрана 2025-11-02 134642.png)
+<img width="377" height="195" alt="Снимок экрана 2025-11-02 134642" src="https://github.com/user-attachments/assets/547d4691-bd39-4a47-8289-d4ba217e12c0" />
 
 Game Catalog / List View
 
-(Place the screenshot of the Games List/Catalog here, like Снимок экрана 2025-11-02 134648.png)
+<img width="377" height="195" alt="Снимок экрана 2025-11-02 134648" src="https://github.com/user-attachments/assets/b925bef7-1216-430b-9a43-4bd52c98bfd2" />
 
 Game Detail Page
-
-(Place the screenshot of a Detailed Game Page here, like Снимок экрана 2025-11-02 134706.png)
+<img width="377" height="195" alt="Снимок экрана 2025-11-02 134706" src="https://github.com/user-attachments/assets/c7104c60-2ea8-4047-baef-1ddd31feaba2" />
 
 Community Screenshots Gallery
 
-(Place the screenshot of the Community Screenshots Gallery here, like Снимок экрана 2025-11-02 134716.png)
+<img width="377" height="195" alt="Снимок экрана 2025-11-02 134716" src="https://github.com/user-attachments/assets/951041fd-3a85-4abc-98c1-48fd585f66e9" />
 
 Global Chat / Community Page
 
-(Place the screenshot of the Global Chat or Interactive Community Page here, like Снимок экрана 2025-11-02 134730.png)
+<img width="377" height="195" alt="Снимок экрана 2025-11-02 134730" src="https://github.com/user-attachments/assets/df838e3b-5dba-4f22-8d58-cfc61071f2a4" />
 
 User Profile / Login
 
-(Place the screenshot of the User Profile or Login/Registration Screen here, like Снимок экрана 2025-11-02 134808.png)
+<img width="377" height="195" alt="Снимок экрана 2025-11-02 134808" src="https://github.com/user-attachments/assets/fa32bf79-fa6a-4ed0-994c-63ad64a38107" />
 
 🛠️ Available Scripts
 
