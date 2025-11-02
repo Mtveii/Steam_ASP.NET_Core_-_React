@@ -127,30 +127,38 @@ Backend (ASP.NET Core)
 
 📁 Project Structure
 
+<h1>FrontendProject/ (React)</h1>
 <ul>
-    <H1>src/</H1>
-    <li>├── components/           # React components</li>
-    <li><li>│   ├── Game.jsx         # Game display component</li></li>
-    <li><li>│   ├── GameCreate.jsx   # Game creation form</li></li>
-    <li><li>│   ├── GameEdit.jsx     # Game editing interface</li></li>
-    <li><li>│   ├── GameDelete.jsx   # Game deletion component</li></li>
-    <li><li>│   ├── Games.jsx        # Games list view</li></li>
-    <li><li>│   ├── ChatPage.jsx     # Chat functionality</li></li>
-    <li><li>│   ├── CommunityPage.jsx# Community features</li></li>
-    <li><li>│   ├── ProfilePage.jsx  # User profile management</li></li>
-    <li><li>│   ├── Login.jsx        # User authentication</li></li>
-    <li><li>│   ├── Register.jsx     # User registration</li></li>
-    <li><li>│   └── components_CSS/  # Component-specific styles</li></li>
-    <li>├── assets/             # Static assets</li>
-    <li>└── App.jsx            # Main application component</li>
+  <li>src/
+    <ul>
+      <li>components/
+        <ul>
+          <li>Game.jsx — Game display component</li>
+          <li>GameCreate.jsx — Game creation form</li>
+          <li>GameEdit.jsx — Game editing interface</li>
+          <li>GameDelete.jsx — Game deletion component</li>
+          <li>Games.jsx — Games list view</li>
+          <li>ChatPage.jsx — Chat functionality</li>
+          <li>CommunityPage.jsx — Community features</li>
+          <li>ProfilePage.jsx — User profile management</li>
+          <li>Login.jsx — User authentication</li>
+          <li>Register.jsx — User registration</li>
+          <li>components_CSS/ — Component-specific styles</li>
+        </ul>
+      </li>
+      <li>assets/ — Static assets</li>
+      <li>App.jsx — Main application component</li>
+    </ul>
+  </li>
 </ul>
-BackendProject/ (ASP.NET Core Web API)
+
+<h1>BackendProject/ (ASP.NET Core Web API)</h1>
 <ul>
-    <li>├── Controllers/         # API Endpoints (e.g., GamesController, AuthController)</li>
-    <li>├── Data/                # DbContext, Migrations</li>
-    <li>├── Models/              # Entity Models (Users, Games, etc.)</li>
-    <li>├── Services/            # Business Logic (e.g., UserService, GameService)</li>
-    <li>└── Program.cs           # Application configuration</li>
+  <li>Controllers/ — API Endpoints (e.g., GamesController, AuthController)</li>
+  <li>Data/ — DbContext, Migrations</li>
+  <li>Models/ — Entity Models (Users, Games, etc.)</li>
+  <li>Services/ — Business Logic (e.g., UserService, GameService)</li>
+  <li>Program.cs — Application configuration</li>
 </ul>
 
 
