@@ -198,7 +198,3 @@ dotnet ef database update           # Apply migrations
 
 <hr/>
 
-<h3 align="center">💡 Created with ❤️ for developers</h3>
-<p align="center">
-  Explore more at <a href="https://gptonline.ai/">gptonline.ai</a>
-</p>
