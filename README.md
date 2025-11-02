@@ -149,7 +149,6 @@ BackendProject/ (ASP.NET Core Web API)
 ├── Models/              # Entity Models (Users, Games, etc.)
 ├── Services/            # Business Logic (e.g., UserService, GameService)
 └── Program.cs           # Application configuration
-
 🚦 Getting Started
 
 1. Clone the repository
