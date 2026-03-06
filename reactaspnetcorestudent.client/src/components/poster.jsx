@@ -3,9 +3,9 @@ import './components_CSS/poster.css';
 
 const ProductCard = () => {
   const slides = [
-    'https://localhost:7129/pics/poster.jpg',
-    'https://localhost:7129/pics/poster2.jpg',
-    'https://localhost:7129/pics/poster3.jpg'
+    'https://localhost:8000/pics/poster.jpg',
+    'https://localhost:8000/pics/poster2.jpg',
+    'https://localhost:8000/pics/poster3.jpg'
   ];
 
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -49,7 +49,7 @@ const ProductCard = () => {
 
   // Функция для получения полного URL изображения
   const getImageUrl = (imageName) => {
-    return `https://localhost:7129/pics/${imageName}`;
+    return `https://localhost:8000/pics/${imageName}`;
   };
 
   const cardStyle = {

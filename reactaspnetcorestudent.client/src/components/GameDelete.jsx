@@ -21,7 +21,7 @@ export function StudentDelete() {
         return <p style={{ color: 'white', textAlign: 'center', marginTop: '40px' }}>Загрузка игры...</p>;
     }
 
-    const prevImg = <Image className="prevImg" src={`https://localhost:7129/pics/${student.photo}`} thumbnail style={styles.previewImage} />;
+    const prevImg = <Image className="prevImg" src={`https://localhost:8000/pics/${student.photo}`} thumbnail style={styles.previewImage} />;
 
     return (
         <div style={styles.overlayStyle}>

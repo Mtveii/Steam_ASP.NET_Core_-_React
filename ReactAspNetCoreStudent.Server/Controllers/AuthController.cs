@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using AspNetCore.WebAPI.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using AspNetCore.WebAPI.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetCore.WebAPI.Controllers
 {
@@ -7,136 +12,153 @@ namespace AspNetCore.WebAPI.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private static readonly List<User> _defaultUsers = new()
-        {
-            new User { Id = 1, Username = "admin", Email = "admin@gmail.com", Password = "admin123", IsAdmin = true, Photo = "User.png" },
-            new User { Id = 2, Username = "user", Email = "user@gmail.com", Password = "user123", IsAdmin = false, Photo = "User.png" }
-        };
+        private readonly ILogger<AuthController> _logger;
+        private readonly PasswordHasher<User> _passwordHasher;
+        private readonly AppDbContext _db;
 
-        private List<User> GetUsersFromSession()
+        public AuthController(ILogger<AuthController> logger, AppDbContext db)
         {
+            _logger = logger;
+            _passwordHasher = new PasswordHasher<User>();
+            _db = db;
+
+            // Ensure there are default users in the database
             try
             {
-                var usersJson = HttpContext.Session.GetString("Users");
-                if (!string.IsNullOrEmpty(usersJson))
+                if (!_db.Users.Any())
                 {
-                    return JsonSerializer.Deserialize<List<User>>(usersJson) ?? new List<User>();
+                    var admin = new User { Username = "admin", Email = "admin@gmail.com", IsAdmin = true, Photo = "User.png" };
+                    admin.Password = _passwordHasher.HashPassword(admin, "admin123");
+
+                    var user = new User { Username = "user", Email = "user@gmail.com", IsAdmin = false, Photo = "User.png" };
+                    user.Password = _passwordHasher.HashPassword(user, "user123");
+
+                    _db.Users.AddRange(admin, user);
+                    _db.SaveChanges();
                 }
-
-                SaveUsersToSession(_defaultUsers);
-                return _defaultUsers;
             }
             catch (Exception ex)
             {
-                return _defaultUsers;
-            }
-        }
-
-        private void SaveUsersToSession(List<User> users)
-        {
-            try
-            {
-                var usersJson = JsonSerializer.Serialize(users);
-                HttpContext.Session.SetString("Users", usersJson);
-            }
-            catch (Exception ex)
-            {
+                _logger.LogError(ex, "Failed to seed default users");
             }
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            var users = GetUsersFromSession();
+            if (string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
+                return BadRequest(new { success = false, error = "Username and password are required" });
 
-            if (users.Any(u => u.Username == request.Username))
+            if (await _db.Users.AnyAsync(u => u.Username.ToLower() == request.Username.ToLower()))
                 return BadRequest(new { success = false, error = "Username already exists" });
 
-            var isFirstUser = !users.Any();
+            var isFirstUser = !await _db.Users.AnyAsync();
 
             var newUser = new User
             {
-                Id = users.Count > 0 ? users.Max(u => u.Id) + 1 : 1,
                 Username = request.Username,
-                Email = request.Email,
-                Password = request.Password,
+                Email = request.Email ?? string.Empty,
                 IsAdmin = isFirstUser,
                 Photo = request.Photo ?? "User.png"
             };
 
-            users.Add(newUser);
-            SaveUsersToSession(users);
+            newUser.Password = _passwordHasher.HashPassword(newUser, request.Password);
 
-            HttpContext.Session.SetString("UserId", newUser.Id.ToString());
-            HttpContext.Session.SetString("Username", newUser.Username);
-            HttpContext.Session.SetString("Email", newUser.Email);
-            HttpContext.Session.SetString("IsAdmin", newUser.IsAdmin.ToString());
-            HttpContext.Session.SetString("Photo", newUser.Photo);
+            _db.Users.Add(newUser);
+            await _db.SaveChangesAsync();
 
-            return Ok(new { success = true, user = newUser });
+            var safeUser = new { newUser.Id, newUser.Username, newUser.Email, newUser.IsAdmin, newUser.Photo };
+            return Ok(new { success = true, user = safeUser });
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            var users = GetUsersFromSession();
-            var user = users.FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password);
+            if (string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
+                return BadRequest(new { success = false, error = "Username and password are required" });
 
+            var user = await _db.Users.FirstOrDefaultAsync(u => u.Username.ToLower() == request.Username.ToLower());
             if (user == null)
                 return BadRequest(new { success = false, error = "Invalid username or password" });
 
-            HttpContext.Session.SetString("UserId", user.Id.ToString());
-            HttpContext.Session.SetString("Username", user.Username);
-            HttpContext.Session.SetString("Email", user.Email);
-            HttpContext.Session.SetString("IsAdmin", user.IsAdmin.ToString());
-            HttpContext.Session.SetString("Photo", user.Photo ?? "User.png");
+            var verify = _passwordHasher.VerifyHashedPassword(user, user.Password, request.Password);
+            if (verify != PasswordVerificationResult.Success)
+                return BadRequest(new { success = false, error = "Invalid username or password" });
 
-            return Ok(new { success = true, user });
+            var safeUser = new { user.Id, user.Username, user.Email, user.IsAdmin, user.Photo };
+            return Ok(new { success = true, user = safeUser });
         }
 
+        // Note: without server-side sessions the client must tell which user is current (e.g. by storing id/token)
         [HttpGet("me")]
-        public async Task<IActionResult> GetCurrentUser()
+        public async Task<IActionResult> GetCurrentUser([FromQuery] int? id, [FromQuery] string? username)
         {
-            var userId = HttpContext.Session.GetString("UserId");
-            if (string.IsNullOrEmpty(userId))
+            if (id == null && string.IsNullOrEmpty(username))
                 return Ok(new { success = false, user = (object?)null });
 
-            var users = GetUsersFromSession();
-            var user = users.FirstOrDefault(u => u.Id.ToString() == userId);
+            User? user = null;
+            if (id != null)
+                user = await _db.Users.FindAsync(id.Value);
+            else if (!string.IsNullOrEmpty(username))
+                user = await _db.Users.FirstOrDefaultAsync(u => u.Username.ToLower() == username.ToLower());
+
+            if (user == null)
+                return Ok(new { success = false, user = (object?)null });
+
             return Ok(new { success = true, user });
         }
 
         [HttpPost("logout")]
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear();
+            // No server-side session to clear when using DB-based auth without cookies
             return Ok(new { success = true, message = "Logged out" });
         }
 
         [HttpGet("users-list")]
         public async Task<IActionResult> GetUsersList()
         {
-            var users = GetUsersFromSession();
-            var userList = users.Select(u => new { u.Id, u.Username, u.Email, u.IsAdmin, u.Photo }).ToList();
-            return Ok(new { totalUsers = users.Count, users = userList });
+            var users = await _db.Users.Select(u => new { u.Id, u.Username, u.Email, u.IsAdmin, u.Photo }).ToListAsync();
+            var total = await _db.Users.CountAsync();
+            return Ok(new { totalUsers = total, users });
         }
 
         [HttpPost("reset-users")]
-        public IActionResult ResetUsers()
+        public async Task<IActionResult> ResetUsers()
         {
-            SaveUsersToSession(_defaultUsers);
-            return Ok(new { success = true, message = "Users reset to default" });
+            try
+            {
+                _db.Users.RemoveRange(_db.Users);
+                await _db.SaveChangesAsync();
+
+                var admin = new User { Username = "admin", Email = "admin@gmail.com", IsAdmin = true, Photo = "User.png" };
+                admin.Password = _passwordHasher.HashPassword(admin, "admin123");
+
+                var user = new User { Username = "user", Email = "user@gmail.com", IsAdmin = false, Photo = "User.png" };
+                user.Password = _passwordHasher.HashPassword(user, "user123");
+
+                _db.Users.AddRange(admin, user);
+                await _db.SaveChangesAsync();
+
+                return Ok(new { success = true, message = "Users reset to default" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to reset users");
+                return StatusCode(500, new { success = false, error = "Failed to reset users" });
+            }
         }
 
         [HttpGet("debug")]
-        public IActionResult Debug()
+        public async Task<IActionResult> Debug()
         {
-            var users = GetUsersFromSession();
+            var users = await _db.Users.Select(u => new { u.Id, u.Username, u.IsAdmin, u.Photo }).ToListAsync();
+            var total = users.Count;
             return Ok(new
             {
-                totalUsers = users.Count,
-                users = users.Select(u => new { u.Id, u.Username, u.IsAdmin, u.Photo }),
-                sessionHasData = !string.IsNullOrEmpty(HttpContext.Session.GetString("Users"))
+                totalUsers = total,
+                users,
+                sessionHasData = false
             });
         }
 
@@ -146,6 +168,17 @@ namespace AspNetCore.WebAPI.Controllers
             if (file == null || file.Length == 0)
                 return BadRequest("No file uploaded.");
 
+            // Validate file size (max 5 MB)
+            const long maxFileSize = 5 * 1024 * 1024;
+            if (file.Length > maxFileSize)
+                return BadRequest("File too large. Max 5 MB allowed.");
+
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+            var originalFileName = Path.GetFileName(file.FileName);
+            var ext = Path.GetExtension(originalFileName).ToLowerInvariant();
+            if (string.IsNullOrEmpty(ext) || !allowedExtensions.Contains(ext))
+                return BadRequest("Invalid file type.");
+
             var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "pics");
 
             if (!Directory.Exists(uploadsFolder))
@@ -153,38 +186,24 @@ namespace AspNetCore.WebAPI.Controllers
                 Directory.CreateDirectory(uploadsFolder);
             }
 
-            var uniqueFileName = $"{Guid.NewGuid()}_{file.FileName}";
+            var uniqueFileName = $"{Guid.NewGuid()}{ext}";
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            try
             {
-                await file.CopyToAsync(stream);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to save uploaded file");
+                return StatusCode(500, "Failed to save file");
+            }
+
             return Ok(new { fileName = uniqueFileName });
         }
     }
 
-    public class User
-    {
-        public int Id { get; set; }
-        public string Username { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public bool IsAdmin { get; set; } = false;
-        public string Photo { get; set; } = "User.png";
-    }
-
-    public class LoginRequest
-    {
-        public string Username { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-    }
-
-    public class RegisterRequest
-    {
-        public string Username { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string? Photo { get; set; }
-    }
 }

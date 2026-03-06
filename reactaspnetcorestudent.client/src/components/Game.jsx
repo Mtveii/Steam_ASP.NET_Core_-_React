@@ -124,7 +124,7 @@ export function Student() {
                                 <Form.Group className="mb-3">
                                     <Form.Label style={styles.formLabel}>Game Poster</Form.Label>
                                     <Image
-                                        src={student.photo.startsWith('http') ? student.photo : `https://localhost:7129/pics/${student.photo}`}
+                                        src={student.photo.startsWith('http') ? student.photo : `https://localhost:8000/pics/${student.photo}`}
                                         thumbnail
                                         style={styles.previewImage}
                                         onError={(e) => {

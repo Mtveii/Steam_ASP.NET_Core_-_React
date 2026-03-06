@@ -17,6 +17,11 @@ namespace AspNetCore.WebAPI.Controllers
             _context = context;
         }
 
+        private bool IsAuthenticated()
+        {
+            return !string.IsNullOrEmpty(HttpContext.Session.GetString("UserId"));
+        }
+
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> GetStudents([FromQuery] string search = "")
@@ -64,6 +69,9 @@ namespace AspNetCore.WebAPI.Controllers
         [Route("")]
         public async Task<IActionResult> PostStudent([FromBody] Student student)
         {
+            if (!IsAuthenticated())
+                return Unauthorized(new { error = "Authentication required" });
+
             try
             {
                 if (student == null)
@@ -100,6 +108,9 @@ namespace AspNetCore.WebAPI.Controllers
         [Route("")]
         public async Task<IActionResult> PutStudent([FromBody] Student student)
         {
+            if (!IsAuthenticated())
+                return Unauthorized(new { error = "Authentication required" });
+
             try
             {
                 var existingStudent = await _context.Students.FindAsync(student.Id);
@@ -126,6 +137,9 @@ namespace AspNetCore.WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
+            if (!IsAuthenticated())
+                return Unauthorized(new { error = "Authentication required" });
+
             try
             {
                 var student = await _context.Students.FindAsync(id);
@@ -147,6 +161,9 @@ namespace AspNetCore.WebAPI.Controllers
         [HttpPost("fix-images")]
         public async Task<IActionResult> FixImages()
         {
+            if (!IsAuthenticated())
+                return Unauthorized(new { error = "Authentication required" });
+
             var students = await _context.Students.ToListAsync();
             foreach (var student in students)
             {

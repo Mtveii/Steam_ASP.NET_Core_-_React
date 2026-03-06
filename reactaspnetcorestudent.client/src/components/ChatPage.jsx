@@ -93,11 +93,11 @@ export function ChatPage() {
                         messages.map((msg, index) => (
                             <div key={msg.id || index} className="message">
                                 <img
-                                    src={msg.userPhoto.startsWith('http') ? msg.userPhoto : `https://localhost:7129/pics/${msg.userPhoto}`}
+                                    src={msg.userPhoto.startsWith('http') ? msg.userPhoto : `https://localhost:8000/pics/${msg.userPhoto}`}
                                     alt={msg.username}
                                     className="user-avatar"
                                     onError={(e) => {
-                                        e.target.src = `https://localhost:7129/pics/User.png`;
+                                        e.target.src = `https://localhost:8000/pics/User.png`;
                                     }}
                                 />
                                 <div className="message-content">

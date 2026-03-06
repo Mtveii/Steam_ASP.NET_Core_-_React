@@ -12,26 +12,39 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("https://localhost:54723", "http://localhost:54723", "https://localhost:7129")
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
+        // In development explicitly allow the frontend dev origins and allow credentials
+        if (builder.Environment.IsDevelopment())
+        {
+            var devOrigins = new[]
+            {
+                "https://localhost:5000",
+                "http://localhost:5000",
+                "https://localhost:5001",
+                "http://localhost:5001"
+            };
+
+            policy.WithOrigins(devOrigins)
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        }
+        else
+        {
+            // In production restrict origins as needed
+            policy.WithOrigins("https://localhost:5000", "http://localhost:5000", "https://localhost:8000")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        }
     });
 });
 
-builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(options =>
-{
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-    options.IdleTimeout = TimeSpan.FromHours(2);
-});
+// Sessions removed: authentication and user state persisted in the database
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
 app.UseCors("AllowReactApp");
-app.UseSession();
 app.UseStaticFiles();
 
 if (app.Environment.IsDevelopment())

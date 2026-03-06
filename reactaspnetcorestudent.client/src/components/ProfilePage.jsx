@@ -13,8 +13,8 @@ export function ProfilePage() {
     }
 
     const photoUrl = currentUser.photo
-        ? `https://localhost:7129/pics/${currentUser.photo}`
-        : `https://localhost:7129/pics/User.png`;
+        ? `https://localhost:8000/pics/${currentUser.photo}`
+        : `https://localhost:8000/pics/User.png`;
 
     return (
         <div className="profile-container">
@@ -23,7 +23,7 @@ export function ProfilePage() {
                 className="profile-avatar"
                 alt="User avatar"
                 onError={(e) => {
-                    e.currentTarget.src = `https://localhost:7129/pics/User.png`;
+                    e.currentTarget.src = `https://localhost:8000/pics/User.png`;
                 }}
             />
             <div className="profile-username">{currentUser.username}</div>

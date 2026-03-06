@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://localhost:7129';
+const BACKEND_URL = 'https://localhost:8000';
 
 export async function populateStudentsData(setter, search = '') {
     try {

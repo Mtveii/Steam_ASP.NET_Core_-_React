@@ -42,7 +42,7 @@ export function Login() {
                     const formData = new FormData();
                     formData.append("file", photoFile);
 
-                    const res = await fetch("https://localhost:7129/api/auth/upload-photo", {
+                    const res = await fetch("https://localhost:8000/api/auth/upload-photo", {
                         method: "POST",
                         body: formData
                     });

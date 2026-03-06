@@ -122,7 +122,7 @@ export function StudentEdit() {
 
     useEffect(() => {
         if (form.photo) {
-            setImgState(`https://localhost:7129/pics/${form.photo}`);
+            setImgState(`https://localhost:8000/pics/${form.photo}`);
         }
     }, [form.photo]);
 
@@ -147,7 +147,7 @@ export function StudentEdit() {
                 const uploadFormData = new FormData();
                 uploadFormData.append('file', photoFile);
 
-                const uploadRes = await fetch('https://localhost:7129/api/auth/upload-photo', {
+                const uploadRes = await fetch('https://localhost:8000/api/auth/upload-photo', {
                     method: 'POST',
                     body: uploadFormData
                 });
@@ -199,7 +199,7 @@ export function StudentEdit() {
             reader.readAsDataURL(file);
         } else {
             setPhotoFile(null);
-            setImgState(form.photo ? `https://localhost:7129/pics/${form.photo}` : '');
+            setImgState(form.photo ? `https://localhost:8000/pics/${form.photo}` : '');
         }
     }
 
@@ -209,7 +209,7 @@ export function StudentEdit() {
             thumbnail
             style={styles.previewImage}
             onError={(e) => {
-                e.currentTarget.src = 'https://localhost:7129/pics/placeholder.png';
+                e.currentTarget.src = 'https://localhost:8000/pics/placeholder.png';
             }}
         />
     ) : (

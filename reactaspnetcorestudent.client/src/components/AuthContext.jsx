@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect } from 'react';
 
-const BACKEND_URL = 'https://localhost:7129';
+const BACKEND_URL = 'https://localhost:8000';
 const AuthContext = createContext();
 
 export function useAuth() {
@@ -18,9 +18,7 @@ export function AuthProvider({ children }) {
 
     const checkAuth = async () => {
         try {
-            const response = await fetch(`${BACKEND_URL}/api/auth/me`, {
-                credentials: 'include'
-            });
+            const response = await fetch(`${BACKEND_URL}/api/auth/me`);
 
             if (response.ok) {
                 const result = await response.json();
@@ -44,7 +42,6 @@ export function AuthProvider({ children }) {
             const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
                 body: JSON.stringify({ username, password }),
             });
 
@@ -70,8 +67,7 @@ export function AuthProvider({ children }) {
             const res = await fetch(`${BACKEND_URL}/api/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, email, password, photo }),
-                credentials: 'include'
+                body: JSON.stringify({ username, email, password, photo })
             });
 
             const data = await res.json();

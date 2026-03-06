@@ -34,7 +34,7 @@ export function Students() {
 
         let imageUrl = student.photo;
         if (!imageUrl.startsWith('http') && !imageUrl.startsWith('https')) {
-            imageUrl = `https://localhost:7129/pics/${imageUrl}`;
+            imageUrl = `https://localhost:8000/pics/${imageUrl}`;
         }
 
         return (

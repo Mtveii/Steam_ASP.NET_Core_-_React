@@ -18,6 +18,11 @@ namespace ReactAspNetCoreStudent.Server.Controllers
             _context = context;
         }
 
+        private bool IsAuthenticated()
+        {
+            return !string.IsNullOrEmpty(HttpContext.Session.GetString("UserId"));
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Screenshot>>> GetScreenshots()
         {
@@ -43,6 +48,9 @@ namespace ReactAspNetCoreStudent.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Screenshot>> PostScreenshot(Screenshot screenshot)
         {
+            if (!IsAuthenticated())
+                return Unauthorized(new { error = "Authentication required" });
+
             screenshot.CreatedAt = DateTime.UtcNow;
             _context.Screenshots.Add(screenshot);
             await _context.SaveChangesAsync();
@@ -52,6 +60,9 @@ namespace ReactAspNetCoreStudent.Server.Controllers
         [HttpPost("{id}/vote")]
         public async Task<ActionResult> Vote(int id, [FromBody] VoteRequest voteRequest)
         {
+            if (!IsAuthenticated())
+                return Unauthorized(new { error = "Authentication required" });
+
             var screenshot = await _context.Screenshots.FindAsync(id);
             if (screenshot == null)
                 return NotFound();
@@ -65,6 +76,9 @@ namespace ReactAspNetCoreStudent.Server.Controllers
         [HttpPost("{id}/comments")]
         public async Task<ActionResult<Comment>> AddComment(int id, Comment comment)
         {
+            if (!IsAuthenticated())
+                return Unauthorized(new { error = "Authentication required" });
+
             var screenshot = await _context.Screenshots.FindAsync(id);
             if (screenshot == null)
                 return NotFound();
@@ -74,12 +88,15 @@ namespace ReactAspNetCoreStudent.Server.Controllers
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetScreenshot), new { id = comment.Id }, comment);
+            return CreatedAtAction(nameof(GetScreenshot), new { id = id }, comment);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteScreenshot(int id)
         {
+            if (!IsAuthenticated())
+                return Unauthorized(new { error = "Authentication required" });
+
             var screenshot = await _context.Screenshots.FindAsync(id);
             if (screenshot == null)
                 return NotFound();
